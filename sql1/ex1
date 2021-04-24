@@ -1,0 +1,47 @@
+PRAGMA foreign_keys=ON;
+
+CREATE TABLE Team (
+    name text PRIMARY KEY,
+    country text
+);
+CREATE TABLE Aircraf (
+    model text PRIMARY KEY,
+    horsepower integer,
+    topspeed integer,
+    width real,
+    height real,
+    weight real
+);
+CREATE TABLE Pilot (
+    num integer PRIMARY KEY,
+    firstname text,
+    surname text,
+    nationality text,
+    birthday date,
+    teamName text REFERENCES Team(name),
+    aircraftModel text REFERENCES Aircraf(model)
+);
+CREATE TABLE Race (
+    location text,
+    edition integer,
+    country text,
+    date date unique,
+    gate integer,
+    eliminations integer,
+    constraint racePK PRIMARY KEY(location, edition)
+);
+CREATE TABLE Participation (
+    num int REFERENCES Pilot(num),
+    location text,
+    edition int,
+    trainingtime
+    trainingpos
+    trainingpenalty
+    qualificationtime
+    qualificationpos
+    qualificationpenalty
+    eliminationtime
+    eliminationpos
+    eliminationpenalty
+    constraint racePK PRIMARY KEY(location, edition)
+);

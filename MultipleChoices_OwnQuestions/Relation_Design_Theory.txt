@@ -1,0 +1,30 @@
+Considering the relation R(A,B,C,D,E,F,G,H) and the set F of functional dependencies for R:
+F{A->B, ACDF->EG, ABCD->E, EF->GH}.
+
+Which of the following choices contains a possible 3NF decomposition of R with lossless join and dependency preservation?
+
+A: mal 2 
+R1(A,B)
+R2(A,B,C,D,E)
+R3(E,F,G)
+R4(E,F,H)
+R5(A,C,D,F) 
+
+B: mal 3 
+R1(A,B)
+R2(A,C,D,E)
+R3(E,F,G,H)
+R5(A,C,D,F)
+
+C: mal 2 e 3
+R1(A,B)
+R2(A,B,C,D,E)
+R3(E,F,G,H)
+R4(A,C,D,F)
+
+D: bem 
+R1(A,B)
+R2(A,C,D,E)
+R3(E,F,G)
+R4(E,F,H)
+R5(A,C,D,F) 

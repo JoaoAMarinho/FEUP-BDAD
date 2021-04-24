@@ -1,0 +1,9 @@
+
+CREATE TABLE Transaction ( 
+    TEXT,
+    number123 REAL,
+    value NU,
+    CONSTRAINT clientPK PRIMARY KEY (TEXT), 
+    CONSTRAINT numberLength CHECK (LENGTH (number123) == 3),
+    CONSTRAINT valueNotNULL CHECK ( value NOT NULL )
+);
