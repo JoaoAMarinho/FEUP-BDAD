@@ -1,0 +1,43 @@
+-- 1. Quais os números dos alunos?
+select nr from aluno;
+
+-- 2. Qual o código e designação das cadeiras do curso 'AC'?
+select cod, Design from cadeira;
+
+-- 3. Existem nomes comuns a alunos e profs? Quais?
+select distinct prof.Nome from aluno, prof where aluno.Nome = prof.Nome;
+
+-- 4. Quais os nomes específicos dos alunos, i.e., que nenhum professor tem?
+select Nome from aluno where Nome not in (select distinct aluno.Nome From aluno, prof WHERE aluno.Nome = prof.Nome);
+
+-- 5. Quais os nomes das pessoas relacionadas com a faculdade?
+select Nome from aluno union select Nome from prof;
+
+-- 6. Quais os nomes dos alunos que fizeram alguma prova de 'ts1'?
+select distinct Nome from aluno, prova where aluno.nr = prova.nr and prova.cod = "TS1";
+
+-- 7. Quais os nomes dos alunos com inscrição no curso 'IS'?
+select distinct Nome from aluno, (select nr  from cadeira, prova where cadeira.cod = prova.cod and cadeira.curso = "IS") B where aluno.nr = B.nr;
+
+-- 8.
+
+-- 9. Qual a nota máxima existente nas provas?
+select max(nota) from prova;
+
+-- 10. Qual a nota média nas provas de BD?
+select avg(nota) from prova where cod="BD";
+
+-- 11. Qual o número de alunos?
+select count(*) from aluno; 
+
+-- 12. Qual o número de cadeiras de cada curso?
+select curso, count(*) from cadeira group by (curso);
+
+-- 13. Qual o número de provas de cada aluno?
+select Nome, number from aluno,(select nr, count(*) as number from prova group by(nr) ) X where aluno.nr = X.nr;
+
+-- 14. Qual a média do número de provas por aluno?
+select avg(number) from aluno,(select nr, count(*) as number from prova group by(nr) ) X where aluno.nr = X.nr;
+
+-- 15. Qual o nome e respetiva média atual (cadeiras feitas, em qualquer curso) de cada aluno?
+//uma nota por cadeira,...
