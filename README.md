@@ -1,5 +1,5 @@
 # FEUP-BDAD 2020/2021
-Weekly exercises and the final projetc for the BDAD curricular unit.
+Weekly exercises and the final project for the BDAD curricular unit.
 
 ### Project Infos
 * **Date:** 2nd Year, 2st Semester, 2020/2021
