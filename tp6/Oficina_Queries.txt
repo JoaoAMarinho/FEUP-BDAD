@@ -1,0 +1,26 @@
+-- Oficina
+
+-- a. Quais as peças com custo unitário inferior a 10€ e cujo código contém ‘98’?
+select idPeca from Peca where codigo like '%98%' and custoUnitario < 10;
+
+-- b. Quais as matrículas dos carros que foram reparados no mês de Setembro de 2010, i.e., cuja reparação terminou nesse mês?
+select matricula from Carro, Reparacao where Carro.idCarro=Reparacao.idCarro and dataFim like '2010-09%';
+
+-- c. Quais os nomes dos clientes proprietários de carros que utilizaram peças
+-- com custo unitário superior a 10€? Apresente o resultado ordenado por ordem descendente do custo unitário.
+select nome from Cliente, ReparacaoPeca, Reparacao, Peca, Carro where ReparacaoPeca.idReparacao=Reparacao.idReparacao and Carro.idCarro=Reparacao.idCarro and Carro.idCliente=Cliente.idCliente and ReparacaoPeca.idPeca=Peca.idPeca and Peca.custoUnitario>10 order by custoUnitario desc;
+
+-- d. Quais os nomes dos clientes que não têm (tanto quanto se saiba) carro?
+select nome from cliente where cliente.idCliente not in ( select idCliente from carro );
+
+-- e. Qual o número de reparações feitas a cada carro?
+select matricula, count(*) from reparacao, carro where carro.idCarro=reparacao.idCarro group by (reparacao.idCarro);
+
+-- f. Qual o número de dias em que cada carro esteve em reparação?
+select idCarro, julianday(reparacao.dataFim)-julianday(reparacao.dataInicio) from reparacao;
+
+-- g.Qual o custo unitário médio, o valor total e o número de unidades das peças,
+-- bem como o valor da peça mais cara e da mais barata?
+select avg(custoUnitario), sum(quantidade*custoUnitario) as valorTotal, sum(quantidade), max(custoUnitario), min(custoUnitario) from peca;
+
+-- h. Qual a especialidade que foi utilizada mais vezes nas reparações dos carros de cada marca?

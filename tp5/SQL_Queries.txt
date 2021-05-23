@@ -1,3 +1,5 @@
+-- Faculdade
+
 -- 1. Quais os números dos alunos?
 select nr from aluno;
 
@@ -19,7 +21,8 @@ select distinct Nome from aluno, prova where aluno.nr = prova.nr and prova.cod =
 -- 7. Quais os nomes dos alunos com inscrição no curso 'IS'?
 select distinct Nome from aluno, (select nr  from cadeira, prova where cadeira.cod = prova.cod and cadeira.curso = "IS") B where aluno.nr = B.nr;
 
--- 8.
+-- 8. Quais os nomes dos alunos que concluíram o curso'IS'.
+select distinct nome from aluno where nr not in ( select nr as alunonr from aluno, cadeira where curso='IS' and not ( cod in (select cod from prova where nota >=10 and nr=alunonr)));
 
 -- 9. Qual a nota máxima existente nas provas?
 select max(nota) from prova;
@@ -40,4 +43,10 @@ select Nome, number from aluno,(select nr, count(*) as number from prova group b
 select avg(number) from aluno,(select nr, count(*) as number from prova group by(nr) ) X where aluno.nr = X.nr;
 
 -- 15. Qual o nome e respetiva média atual (cadeiras feitas, em qualquer curso) de cada aluno?
-//uma nota por cadeira,...
+select Nome,avg(nota) from aluno natural join (select nr, max(nota) as nota from prova group by nr, cod having nota >=9.5)x group by Nome;
+
+-- 16. Qual a nota máxima de cada cadeira e qual o aluno que a obteve?
+select Nome, cod, nota from aluno natural join (select nr,cod,max(nota) as nota from prova group by cod)x;
+
+-- 17. 
+select distinct nome from aluno where nr not in ( select nr as alunonr from aluno, cadeira where curso='IS' and not ( cod in (select cod from prova where nota >=10 and nr=alunonr)));

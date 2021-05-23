@@ -140,7 +140,7 @@ CREATE TABLE Request (
     CONSTRAINT cardNotNull CHECK ( cardNumber IS NOT NULL ),
     CONSTRAINT restaurantNotNull CHECK ( restaurantID IS NOT NULL ),
     CONSTRAINT priceRange CHECK ( price > 0.0 ),
-    CONSTRAINT datePattern CHECK (data LIKE '__/__/____'),
+    CONSTRAINT datePattern CHECK (data LIKE '____-__-__'),
     CONSTRAINT timePattern CHECK (time LIKE '__:__')
 );
 
